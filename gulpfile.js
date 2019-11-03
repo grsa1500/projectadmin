@@ -17,12 +17,20 @@ const files = {
     jsPath: "src/**/*.js",
     cssPath: "src/**/*.css",
     imgPath: "src/img/*",
-    sassPath:"src/sass/*.scss"
+    sassPath:"src/sass/*.scss",
+    phpPath:"src/*.php"
 }
 
 //Lägga över HTML-filer från src till pub
 function copyHTML() {
     return src(files.htmlPath)
+    .pipe(dest('pub'))
+    .pipe(browserSync.stream())
+    
+}
+
+function phpTask() {
+    return src(files.phpPath)
     .pipe(dest('pub'))
     .pipe(browserSync.stream())
     
@@ -66,8 +74,8 @@ function watchTask() {
         }
     });
 
-     watch([files.htmlPath, files.jsPath, files.imgPath, files.sassPath],
-        parallel(copyHTML, jsTask, imgTask, sassTask))
+     watch([files.htmlPath, files.jsPath, files.imgPath, files.sassPath, files.phpPath],
+        parallel(copyHTML, jsTask, imgTask, sassTask, phpTask))
 
         .on('change', browserSync.reload);
   
@@ -76,7 +84,7 @@ function watchTask() {
 
 exports.default = series(
 
-    parallel(copyHTML, jsTask, imgTask, sassTask),
+    parallel(copyHTML, jsTask, imgTask, sassTask, phpTask),
     watchTask 
    
 );

@@ -1,13 +1,28 @@
-<html >
+<?php
+session_start();
+if(!isset($_SESSION['gretaloggedin'])) {
+    header("Location: login.php"); 
+}
+
+if(isset($_GET['logout'])) {
+    unset($_SESSION['gretaloggedin']);
+    header("Location: login.php"); 
+}
+?>
+
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../img/favicon.png" type="image/gif" sizes="16x16">
   <script src="https://kit.fontawesome.com/c2054d9afc.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Homemade+Apple&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <title>Moment 5</title>
+    <title>Admin</title>
 </head>
+
+
 
 <body>
    
@@ -23,16 +38,17 @@
         
         </div>
     <div class="container">
-            <h1>Moment 5 - Webbtjänster</h1>
+            <h1> <a href="index.php"> Kurser</a> <a href="jobs.php"> Jobb </a> <a href="project.php">Projekt</a></h1> <h2 class="right"> <a href="?logout=confirmed">Logga ut</a> </h2>
             <h2><i class="fas fa-list"></i> Kurser jag läst</h2>
 
             <table>
                 <thead>
                     <tr>
                         <th>Kursnamn</th>
-                        <th>Kurskod</th>
-                        <th>Progression</th>
-                        <th>Kursplan</th>
+                        <th>Skola</th>
+                        <th>Program</th>
+                        <th>Poäng</th>
+                        <th>Datum</th>
                         <th>Ändra / Ta bort</th>
                     
                     </tr>
@@ -53,22 +69,29 @@
                     <input type="text" name="name" id="name" required/>
                 </label>
                  <label>
-                    Kurskod: <br>
-                    <input type="text" name="code" id="code" required/>
-                </label>
-                <label>
-                    Progression: <br>
-                    <select id="progression">
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-
-                          </select>
+                    Skola: <br>
+                    <input type="text" name="school" id="school" required/>
                 </label>
                 <label >
-                    Kursplan: <br>
-                    <input type="text" name="syllabus" id="syllabus" required/>
+                    Poäng: <br>
+                    <input type="text" name="points" id="points" required/>
                 </label>
+                <label >
+                    Program (eller fristående): <br>
+                    <input type="text" name="program" id="program" required/>
+                </label>
+               
+                <label>
+                    Startår: <br>
+                    <input type="text" name="startyear" id="startyear" required/>
+                </label>
+                
+                <label>
+                    Slutår (eller pågående): <br>
+                    <input type="text" name="endyear" id="endyear" required/>
+                </label>
+                
+           
                 <input type="submit" value="Lägg till" id="submitbutton" class="btn btn-blue">
             </section>
     
@@ -77,7 +100,13 @@
     Webbutveckling III <br>
     Greta Samuelsson - 2019
 </footer>
+
+
     <script src="js/main.js"></script>
+    
+    <script>
+    document.getElementById("submitbutton").addEventListener("click", addCourse);
+    window.onload = loadCourseList;</script>
 </body>
 
 </html>

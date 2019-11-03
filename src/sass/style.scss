@@ -16,9 +16,10 @@ body {
     color: $gray;
     padding-top: 40px;
 min-height: 100vh;
+height: auto;
     
     position: relative;
-    padding-bottom: 450px;
+    padding-bottom: 550px;
 }
 
 //Button 
@@ -56,7 +57,7 @@ label {
     }
 }
 
-input[type=text], select {
+input[type=text], select,input[type=password] {
     padding: 10px;
     width: 100%;
     margin-top: 10px;
@@ -64,7 +65,9 @@ input[type=text], select {
 }
 
 
-
+.right {
+    float: right;
+}
 
 
 .container {
@@ -94,6 +97,9 @@ table {
 th, td {
 
     padding: 15px;
+    max-width: 140px;
+    overflow: hidden;
+
 }
 
 td {
@@ -133,12 +139,12 @@ footer {
     text-align: right;
 }
 
-th:nth-child(5) {
+#remove {
     text-align: right;
 }
 
 tr {
-    td:nth-child(5) {
+    #remove {
       a {
       margin-left: 5px;
       margin-right: 5px;
@@ -188,4 +194,38 @@ tr {
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+
+
+  .login {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 100vh;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+
+      section {
+          height: 300px;
+         border: 2px solid rgba(128, 128, 128, 0.26);
+          margin-top: -200px;
+          padding: 20px;
+
+          input {
+              width: 100%;
+
+          
+          }
+
+          label:nth-child(odd) {
+            float: left;
+        }
+        label:nth-child(even) {
+            float: right;
+        }
+      }
   }
